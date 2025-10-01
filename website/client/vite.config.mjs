@@ -129,6 +129,10 @@ export default defineConfig({
   base: '/',
   server: {
     headers: { 'Cache-Control': 'no-store' },
+    watch: {
+      usePolling: true,
+      interval: 1000
+    },
     proxy: {
       // proxy all requests to the server at IP:PORT as specified in the top-level config
       '^/api/v3': {

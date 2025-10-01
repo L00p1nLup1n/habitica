@@ -61,5 +61,8 @@
     "terser-webpack-plugin": "^5.3.10",
     "vitest": "^3.0.5",
     "webpack": "^5.94.0"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.3.3"
   }
 }
