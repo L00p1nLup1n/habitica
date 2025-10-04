@@ -52,17 +52,26 @@
         <b-navbar-nav class="menu-list">
           <b-nav-item
             class="topbar-item"
-            :class="{'active': $route.path === '/'}"
+            :class="{ active: $route.path === '/' }"
             tag="li"
-            :to="{name: 'tasks'}"
+            :to="{ name: 'tasks' }"
             exact="exact"
           >
-            {{ $t('tasks') }}
+            {{ $t("tasks") }}
+          </b-nav-item>
+          <b-nav-item
+            class="topbar-item"
+            :class="{ active: $route.path.startsWith('/adventures') }"
+            tag="li"
+            :to="{ path: '/adventures' }"
+          >
+            Adventures
           </b-nav-item>
           <li
             class="topbar-item droppable"
             :class="{
-              'active': $route.path.startsWith('/inventory')}"
+              active: $route.path.startsWith('/inventory'),
+            }"
           >
             <div
               class="chevron rotate"
@@ -76,36 +85,37 @@
             </div>
             <router-link
               class="nav-link"
-              :to="{name: 'items'}"
+              :to="{ name: 'items' }"
             >
-              {{ $t('inventory') }}
+              {{ $t("inventory") }}
             </router-link>
             <div class="topbar-dropdown">
               <router-link
                 class="topbar-dropdown-item dropdown-item"
-                :to="{name: 'items'}"
+                :to="{ name: 'items' }"
                 exact="exact"
               >
-                {{ $t('items') }}
+                {{ $t("items") }}
               </router-link>
               <router-link
                 class="topbar-dropdown-item dropdown-item"
-                :to="{name: 'equipment'}"
+                :to="{ name: 'equipment' }"
               >
-                {{ $t('equipment') }}
+                {{ $t("equipment") }}
               </router-link>
               <router-link
                 class="topbar-dropdown-item dropdown-item"
-                :to="{name: 'stable'}"
+                :to="{ name: 'stable' }"
               >
-                {{ $t('stable') }}
+                {{ $t("stable") }}
               </router-link>
             </div>
           </li>
           <li
             class="topbar-item droppable"
             :class="{
-              'active': $route.path.startsWith('/shop')}"
+              active: $route.path.startsWith('/shop'),
+            }"
           >
             <div
               class="chevron rotate"
@@ -119,57 +129,57 @@
             </div>
             <router-link
               class="nav-link"
-              :to="{name: 'market'}"
+              :to="{ name: 'market' }"
             >
-              {{ $t('shops') }}
+              {{ $t("shops") }}
             </router-link>
             <div class="topbar-dropdown">
               <router-link
                 class="topbar-dropdown-item dropdown-item"
-                :to="{name: 'market'}"
+                :to="{ name: 'market' }"
                 exact="exact"
               >
-                {{ $t('market') }}
+                {{ $t("market") }}
               </router-link>
               <router-link
                 class="topbar-dropdown-item dropdown-item"
-                :to="{name: 'quests'}"
+                :to="{ name: 'quests' }"
               >
-                {{ $t('quests') }}
+                {{ $t("quests") }}
               </router-link>
               <router-link
                 class="topbar-dropdown-item dropdown-item"
-                :to="{name: 'customizations'}"
+                :to="{ name: 'customizations' }"
               >
-                {{ $t('customizations') }}
+                {{ $t("customizations") }}
               </router-link>
               <router-link
                 class="topbar-dropdown-item dropdown-item"
-                :to="{name: 'seasonal'}"
+                :to="{ name: 'seasonal' }"
               >
-                {{ $t('titleSeasonalShop') }}
+                {{ $t("titleSeasonalShop") }}
               </router-link>
               <router-link
                 class="topbar-dropdown-item dropdown-item"
-                :to="{name: 'time'}"
+                :to="{ name: 'time' }"
               >
-                {{ $t('titleTimeTravelers') }}
+                {{ $t("titleTimeTravelers") }}
               </router-link>
             </div>
           </li>
           <b-nav-item
             v-if="user.party._id && user._id !== partyLeaderId"
             class="topbar-item"
-            :class="{'active': $route.path.startsWith('/party')}"
+            :class="{ active: $route.path.startsWith('/party') }"
             tag="li"
-            :to="{name: 'party'}"
+            :to="{ name: 'party' }"
           >
-            {{ $t('party') }}
+            {{ $t("party") }}
           </b-nav-item>
           <li
             v-if="user.party._id && user._id === partyLeaderId"
             class="topbar-item droppable"
-            :class="{'active': $route.path.startsWith('/party')}"
+            :class="{ active: $route.path.startsWith('/party') }"
           >
             <div
               class="chevron rotate"
@@ -183,31 +193,32 @@
             </div>
             <router-link
               class="nav-link"
-              :to="{name: 'party'}"
+              :to="{ name: 'party' }"
             >
-              {{ $t('party') }}
+              {{ $t("party") }}
             </router-link>
             <div class="topbar-dropdown">
               <router-link
                 class="topbar-dropdown-item dropdown-item"
-                :to="{name: 'lookingForParty'}"
+                :to="{ name: 'lookingForParty' }"
               >
-                {{ $t('lookingForPartyTitle') }}
+                {{ $t("lookingForPartyTitle") }}
               </router-link>
             </div>
           </li>
           <b-nav-item
             v-if="!user.party._id"
             class="topbar-item"
-            :class="{'active': $route.path.startsWith('/party')}"
+            :class="{ active: $route.path.startsWith('/party') }"
             @click="openPartyModal()"
           >
-            {{ $t('party') }}
+            {{ $t("party") }}
           </b-nav-item>
           <li
             class="topbar-item droppable"
             :class="{
-              'active': $route.path.startsWith('/group-plans')}"
+              active: $route.path.startsWith('/group-plans'),
+            }"
           >
             <div
               v-if="groupPlans && groupPlans.length > 0"
@@ -224,14 +235,17 @@
               class="nav-link"
               :to="groupPlanTopLink"
             >
-              {{ $t('group') }}
+              {{ $t("group") }}
             </router-link>
             <div class="topbar-dropdown">
               <router-link
                 v-for="group in groupPlans"
                 :key="group._id"
                 class="topbar-dropdown-item dropdown-item"
-                :to="{name: 'groupPlanDetailTaskInformation', params: {groupId: group._id}}"
+                :to="{
+                  name: 'groupPlanDetailTaskInformation',
+                  params: { groupId: group._id },
+                }"
               >
                 {{ group.name }}
               </router-link>
@@ -240,7 +254,8 @@
           <li
             class="topbar-item droppable"
             :class="{
-              'active': $route.path.startsWith('/challenges')}"
+              active: $route.path.startsWith('/challenges'),
+            }"
           >
             <div
               class="chevron rotate"
@@ -254,29 +269,30 @@
             </div>
             <router-link
               class="nav-link"
-              :to="{name: 'myChallenges'}"
+              :to="{ name: 'myChallenges' }"
             >
-              {{ $t('challenges') }}
+              {{ $t("challenges") }}
             </router-link>
             <div class="topbar-dropdown">
               <router-link
                 class="topbar-dropdown-item dropdown-item"
-                :to="{name: 'myChallenges'}"
+                :to="{ name: 'myChallenges' }"
               >
-                {{ $t('myChallenges') }}
+                {{ $t("myChallenges") }}
               </router-link>
               <router-link
                 class="topbar-dropdown-item dropdown-item"
-                :to="{name: 'findChallenges'}"
+                :to="{ name: 'findChallenges' }"
               >
-                {{ $t('findChallenges') }}
+                {{ $t("findChallenges") }}
               </router-link>
             </div>
           </li>
           <li
             class="topbar-item droppable"
             :class="{
-              'active': $route.path.startsWith('/help')}"
+              active: $route.path.startsWith('/help'),
+            }"
           >
             <div
               class="chevron rotate"
@@ -290,49 +306,50 @@
             </div>
             <router-link
               class="nav-link"
-              :to="{name: 'faq'}"
+              :to="{ name: 'faq' }"
             >
-              {{ $t('help') }}
+              {{ $t("help") }}
             </router-link>
             <div class="topbar-dropdown">
               <router-link
                 class="topbar-dropdown-item dropdown-item"
-                :to="{name: 'faq'}"
+                :to="{ name: 'faq' }"
               >
-                {{ $t('faq') }}
+                {{ $t("faq") }}
               </router-link>
               <router-link
                 class="topbar-dropdown-item dropdown-item"
-                :to="{name: 'overview'}"
+                :to="{ name: 'overview' }"
               >
-                {{ $t('overview') }}
+                {{ $t("overview") }}
               </router-link>
               <a
                 class="topbar-dropdown-item dropdown-item"
                 target="_blank"
                 @click.prevent="openBugReportModal()"
               >
-                {{ $t('reportBug') }}
+                {{ $t("reportBug") }}
               </a>
               <a
                 class="topbar-dropdown-item dropdown-item"
                 target="_blank"
                 @click.prevent="openBugReportModal(true)"
               >
-                {{ $t('askQuestion') }}
+                {{ $t("askQuestion") }}
               </a>
               <a
                 class="topbar-dropdown-item dropdown-item"
                 href="https://docs.google.com/forms/d/e/1FAIpQLScPhrwq_7P1C6PTrI3lbvTsvqGyTNnGzp1ugi1Ml0PFee_p5g/viewform?usp=sf_link"
                 target="_blank"
-              >{{ $t('requestFeature') }}</a>
+              >{{ $t("requestFeature") }}</a>
             </div>
           </li>
           <li
             v-if="hasElevatedPrivileges"
             class="topbar-item droppable"
             :class="{
-              'active': $route.path.startsWith('/admin')}"
+              active: $route.path.startsWith('/admin'),
+            }"
           >
             <div
               class="chevron rotate"
@@ -347,29 +364,29 @@
             <router-link
               v-if="hasPermission(user, 'userSupport')"
               class="nav-link"
-              :to="{name: 'adminPanel'}"
+              :to="{ name: 'adminPanel' }"
             >
-              {{ $t('admin') }}
+              {{ $t("admin") }}
             </router-link>
             <a
               v-else
               href="#"
               class="nav-link"
             >
-              {{ $t('admin') }}
+              {{ $t("admin") }}
             </a>
             <div class="topbar-dropdown">
               <router-link
                 v-if="hasPermission(user, 'userSupport')"
                 class="topbar-dropdown-item dropdown-item"
-                :to="{name: 'adminPanel'}"
+                :to="{ name: 'adminPanel' }"
               >
                 {{ $t("adminPanel") }}
               </router-link>
               <router-link
                 v-if="hasPermission(user, 'accessControl')"
                 class="topbar-dropdown-item dropdown-item"
-                :to="{name: 'blockers'}"
+                :to="{ name: 'blockers' }"
               >
                 {{ $t("siteBlockers") }}
               </router-link>
@@ -379,7 +396,7 @@
                 target="_blank"
                 href="https://panel.habitica.com"
               >
-                {{ $t('newsroom') }}
+                {{ $t("newsroom") }}
               </a>
             </div>
           </li>
@@ -449,338 +466,337 @@ body.modal-open #habitica-menu {
 </style>
 
 <style lang="scss" scoped>
-  @import '@/assets/scss/colors.scss';
-  @import '@/assets/scss/utils.scss';
-  @import '@/assets/scss/variables.scss';
+@import "@/assets/scss/colors.scss";
+@import "@/assets/scss/utils.scss";
+@import "@/assets/scss/variables.scss";
 
-  .menu-toggle {
-    border: none;
+.menu-toggle {
+  border: none;
+}
+
+#menu_collapse {
+  display: flex;
+  justify-content: space-between;
+}
+
+.topbar {
+  z-index: 1080;
+  background: $purple-100 url(@/assets/svg/for-css/bits.svg) right top no-repeat;
+  min-height: 56px;
+  box-shadow: 0 1px 2px 0 rgba($black, 0.24);
+
+  a {
+    color: white !important;
   }
+}
 
-  #menu_collapse {
-    display: flex;
-    justify-content: space-between;
-  }
+.logo {
+  color: $white;
+  height: 32px;
+  object-fit: contain;
+  width: 32px;
+}
 
-  .topbar {
-    z-index: 1080;
-    background: $purple-100 url(@/assets/svg/for-css/bits.svg) right top no-repeat;
-    min-height: 56px;
-    box-shadow: 0 1px 2px 0 rgba($black, 0.24);
+.quick-menu {
+  display: flex;
+  margin-left: auto;
+}
 
-    a {
-      color: white !important;
+.currency-tray {
+  display: flex;
+}
+
+.topbar-item {
+  font-size: 16px;
+  color: $white !important;
+  font-weight: bold;
+  transition: none;
+
+  .topbar-dropdown {
+    overflow: hidden;
+    max-height: 0;
+
+    .topbar-dropdown-item {
+      line-height: 1.5;
+      font-size: 16px;
     }
   }
 
-  .logo {
+  > a {
+    padding: 0.8em 1em !important;
+  }
+
+  &.down {
+    color: $white !important;
+    background: $purple-200;
+
+    .topbar-dropdown {
+      margin-top: 0; // Remove gap between navbar and drop-down.
+      background: $purple-200;
+      border-radius: 0px;
+      border: none;
+      box-shadow: none;
+      padding: 0px;
+
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+
+      .topbar-dropdown-item {
+        font-size: 16px;
+        box-shadow: none;
+        color: $white;
+        border: none;
+        line-height: 1.5;
+        display: list-item;
+
+        &.active {
+          background: $purple-300;
+        }
+
+        &:hover {
+          background: $purple-300;
+          text-decoration: none;
+
+          &:last-child {
+            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.dropdown + .dropdown {
+  margin-left: 0px;
+}
+
+.item-with-icon {
+  color: $white;
+  font-size: 16px;
+  font-weight: normal;
+  white-space: nowrap;
+
+  span {
+    font-weight: bold;
+  }
+
+  &.gem {
+    margin-left: 12px;
+  }
+
+  &.gold {
+    margin-left: 12px;
+    margin-right: 36px;
+  }
+
+  &:focus ::v-deep .top-menu-icon.svg-icon,
+  &:hover ::v-deep .top-menu-icon.svg-icon {
+    color: $white;
+  }
+
+  & ::v-deep .top-menu-icon.svg-icon {
+    color: $header-color;
+    vertical-align: bottom;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    margin-left: 12px;
+  }
+}
+
+a.item-with-icon:focus {
+  outline: none;
+}
+
+@keyframes rotateGemColors {
+  /* Gems are green by default, so we rotate through ROYGBIV starting with green. */
+  20% {
+    fill: #46a7d9; /* Blue */
+  }
+  40% {
+    fill: #925cf3; /* Purple */
+  }
+  60% {
+    fill: #de3f3f; /* Red */
+  }
+  80% {
+    fill: #fa8537; /* Orange */
+  }
+  100% {
+    fill: #ffb445; /* Yellow */
+  }
+}
+
+.gem:hover {
+  cursor: pointer;
+
+  & ::v-deep path:nth-child(1) {
+    animation: rotateGemColors 3s linear infinite alternate;
+  }
+}
+
+.message-count.top-count {
+  background-color: $red-50;
+  position: absolute;
+  right: 0;
+  top: -0.5em;
+  padding: 0.2em;
+}
+@media only screen and (max-width: 1200px) {
+  .chevron {
+    display: none;
+  }
+
+  .gryphon {
+    background-size: cover;
     color: $white;
     height: 32px;
-    object-fit: contain;
+    margin: 0 auto;
+    top: -10px;
+    padding-left: 8px;
+    position: relative;
     width: 32px;
   }
 
-  .quick-menu {
-    display: flex;
-    margin-left: auto;
-  }
-
-  .currency-tray {
-    display: flex;
+  .logo {
+    padding-top: 12px;
+    color: $white;
   }
 
   .topbar-item {
-    font-size: 16px;
-    color: $white !important;
-    font-weight: bold;
-    transition: none;
+    font-size: 14px !important;
+  }
+}
 
-    .topbar-dropdown  {
-        overflow: hidden;
-        max-height: 0;
-
-        .topbar-dropdown-item {
-          line-height: 1.5;
-          font-size: 16px;
-        }
-    }
-
-    >a {
-      padding: .8em 1em !important;
-    }
-
-    &.down {
-      color: $white !important;
-      background: $purple-200;
-
-      .topbar-dropdown {
-        margin-top: 0; // Remove gap between navbar and drop-down.
-        background: $purple-200;
-        border-radius: 0px;
-        border: none;
-        box-shadow: none;
-        padding: 0px;
-
-        border-bottom-right-radius: 5px;
-        border-bottom-left-radius: 5px;
-
-        .topbar-dropdown-item {
-          font-size: 16px;
-          box-shadow: none;
-          color: $white;
-          border: none;
-          line-height: 1.5;
-          display: list-item;
-
-          &.active {
-            background: $purple-300;
-          }
-
-          &:hover {
-            background: $purple-300;
-            text-decoration: none;
-
-            &:last-child {
-              border-bottom-right-radius: 5px;
-              border-bottom-left-radius: 5px;
-            }
-          }
-        }
-      }
-    }
+@media only screen and (min-width: 992px) {
+  .chevron {
+    display: none;
   }
 
-  .dropdown + .dropdown {
-    margin-left: 0px;
+  .mobile-only {
+    display: none !important;
   }
 
-  .item-with-icon {
-    color: $white;
-    font-size: 16px;
-    font-weight: normal;
-    white-space: nowrap;
+  .topbar {
+    max-height: $menuToolbarHeight;
 
-    span {
-      font-weight: bold;
-    }
-
-    &.gem {
-      margin-left: 12px;
-    }
-
-    &.gold {
-      margin-left: 12px;
-      margin-right: 36px;
-    }
-
-    &:focus ::v-deep .top-menu-icon.svg-icon,
-    &:hover ::v-deep .top-menu-icon.svg-icon {
-      color: $white;
-    }
-
-    & ::v-deep .top-menu-icon.svg-icon {
-      color: $header-color;
-      vertical-align: bottom;
-      display: inline-block;
-      width: 24px;
-      height: 24px;
-      margin-right: 12px;
-      margin-left: 12px;
-    }
-  }
-
-  a.item-with-icon:focus {
-    outline: none;
-  }
-
-  @keyframes rotateGemColors {
-    /* Gems are green by default, so we rotate through ROYGBIV starting with green. */
-    20% {
-      fill: #46A7D9; /* Blue */
-    }
-    40% {
-      fill: #925CF3; /* Purple */
-    }
-    60% {
-      fill: #DE3F3F; /* Red */
-    }
-    80% {
-      fill: #FA8537; /* Orange */
-    }
-    100% {
-      fill: #FFB445; /* Yellow */
-    }
-  }
-
-  .gem:hover {
-    cursor: pointer;
-
-    & ::v-deep path:nth-child(1) {
-      animation: rotateGemColors 3s linear infinite alternate;
-    }
-  }
-
-  .message-count.top-count {
-    background-color: $red-50;
-    position: absolute;
-    right: 0;
-    top: -0.5em;
-    padding: .2em;
-  }
-  @media only screen and (max-width: 1200px) {
-    .chevron {
-      display: none
-    }
-
-    .gryphon {
-      background-size: cover;
-      color: $white;
-      height: 32px;
-      margin: 0 auto;
-      top: -10px;
-      padding-left: 8px;
-      position: relative;
-      width: 32px;
-    }
-
-    .logo {
-      padding-top: 12px;
-      color: $white;
+    .currency-tray {
+      margin-left: auto;
     }
 
     .topbar-item {
-      font-size: 14px !important;
+      padding-top: 5px;
+      height: 56px;
+
+      &:hover {
+        background: $purple-200;
+      }
+
+      &.active:not(:hover) {
+        box-shadow: 0px -4px 0px $purple-300 inset;
+      }
+    }
+
+    .topbar-dropdown {
+      position: absolute;
     }
   }
+}
 
-  @media only screen and (min-width: 992px) {
-    .chevron {
-      display: none
-    }
+@media only screen and (max-width: 992px) {
+  .brand {
+    margin: 0;
+  }
 
-    .mobile-only {
-      display: none !important;
-    }
+  .gryphon {
+    position: absolute;
+    left: calc(50% - 30px);
+    top: -2px;
+  }
 
-    .topbar {
-      max-height: $menuToolbarHeight;
+  #menu_collapse {
+    margin: 0.6em -16px -8px;
+    overflow: auto;
+    flex-direction: column;
+    background-color: $purple-100;
 
-      .currency-tray {
-        margin-left: auto;
+    .menu-list {
+      width: 100%;
+      order: 1;
+      text-align: center;
+
+      .topbar-dropdown {
+        transition: max-height 0.25s ease;
+      }
+
+      .topbar-dropdown-item {
+        background: #432874;
+        border-bottom: #6133b4 solid 1px;
+      }
+
+      .chevron {
+        width: 20%;
+        height: 42px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: block;
+      }
+
+      .chevron-icon-down {
+        width: 14px;
+        top: 11px;
+        right: 12px;
+        position: absolute;
+        display: block;
+        transition: transform 0.25s ease;
+      }
+
+      .down .rotate .chevron-icon-down {
+        transform: rotate(-180deg);
       }
 
       .topbar-item {
-        padding-top: 5px;
-        height: 56px;
+        position: relative;
 
-        &:hover {
-          background: $purple-200;
+        &.active {
+          background: #6133b4;
         }
 
-        &.active:not(:hover) {
-          box-shadow: 0px -4px 0px $purple-300 inset;
-        }
-      }
-
-      .topbar-dropdown {
-        position: absolute;
+        background: #4f2a93;
+        border-bottom: #6133b4 solid 1px;
       }
     }
   }
 
-  @media only screen and (max-width: 992px) {
-    .brand {
-      margin: 0;
-    }
+  .currency-tray {
+    justify-content: center;
+    min-height: 40px;
+    background: #271b3d;
+    width: 100%;
+  }
 
-    .gryphon {
-      position: absolute;
-      left: calc(50% - 30px);
-      top: -2px;
-    }
+  .desktop-only {
+    display: none !important;
+  }
 
-    #menu_collapse {
-      margin: 0.6em -16px -8px;
-      overflow: auto;
-      flex-direction: column;
-      background-color: $purple-100;
+  .navbar-toggler {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 
-      .menu-list {
-        width: 100%;
-        order: 1;
-        text-align: center;
+  .item-with-icon {
+    margin-left: 0px;
+    margin-right: 16px;
 
-        .topbar-dropdown  {
-          transition: max-height 0.25s ease;
-        }
-
-        .topbar-dropdown-item {
-          background: #432874;
-          border-bottom: #6133b4 solid 1px;
-        }
-
-        .chevron {
-          width: 20%;
-          height: 42px;
-          position: absolute;
-          right: 0;
-          top: 0;
-          display: block;
-        }
-
-        .chevron-icon-down {
-          width: 14px;
-          top: 11px;
-          right: 12px;
-          position: absolute;
-          display: block;
-          transition: transform 0.25s ease;
-        }
-
-        .down .rotate .chevron-icon-down {
-          transform: rotate(-180deg);
-          }
-
-        .topbar-item {
-          position: relative;
-
-          &.active {
-            background: #6133b4;
-          }
-
-          background: #4f2a93;
-          border-bottom: #6133b4 solid 1px;
-        }
-      }
-    }
-
-    .currency-tray {
-      justify-content: center;
-      min-height: 40px;
-      background: #271b3d;
-      width: 100%;
-    }
-
-    .desktop-only {
-      display: none !important;
-    }
-
-    .navbar-toggler {
-      padding-left: 8px;
-      padding-right: 8px;
-    }
-
-    .item-with-icon {
+    & ::v-deep .top-menu-icon.svg-icon {
+      margin-right: 0px;
       margin-left: 0px;
-      margin-right: 16px;
-
-      & ::v-deep .top-menu-icon.svg-icon {
-        margin-right: 0px;
-        margin-left: 0px;
-      }
     }
   }
-
+}
 </style>
 
 <script>
@@ -851,24 +867,30 @@ export default {
       };
     },
     hasElevatedPrivileges () {
-      return this.user.permissions.fullAccess
+      return (
+        this.user.permissions.fullAccess
         || this.user.permissions.userSupport
         || this.user.permissions.accessControl
-        || this.user.permissions.news;
+        || this.user.permissions.news
+      );
     },
   },
   async mounted () {
     await this.getUserGroupPlans();
     await this.getUserParty();
     if (document.getElementById('menu_collapse')) {
-      Array.from(document.getElementById('menu_collapse').getElementsByTagName('a')).forEach(link => {
+      Array.from(
+        document.getElementById('menu_collapse').getElementsByTagName('a'),
+      ).forEach(link => {
         link.addEventListener('click', this.closeMenu);
       });
     }
-    Array.from(document.getElementsByClassName('topbar-item')).forEach(link => {
-      link.addEventListener('mouseenter', this.dropdownDesktop);
-      link.addEventListener('mouseleave', this.dropdownDesktop);
-    });
+    Array.from(document.getElementsByClassName('topbar-item')).forEach(
+      link => {
+        link.addEventListener('mouseenter', this.dropdownDesktop);
+        link.addEventListener('mouseleave', this.dropdownDesktop);
+      },
+    );
     this.$root.$on('update-party', () => {
       this.getUserParty();
     });
@@ -928,9 +950,11 @@ export default {
       element.lastChild.style.maxHeight = `${element.lastChild.scrollHeight}px`;
     },
     closeMenu () {
-      Array.from(document.getElementsByClassName('droppable')).forEach(droppableElement => {
-        this.closeDropdown(droppableElement);
-      });
+      Array.from(document.getElementsByClassName('droppable')).forEach(
+        droppableElement => {
+          this.closeDropdown(droppableElement);
+        },
+      );
       if (this.isMobile()) {
         this.menuIsOpen = false;
       }

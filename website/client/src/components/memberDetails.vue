@@ -20,7 +20,7 @@
       <div class="d-flex align-items-center profile-first-row">
         <class-badge
           v-if="classBadgePosition === 'next-to-name'"
-          :member-class="member.stats.class"
+          :member-class="displayClass"
         />
         <div
           class="d-flex flex-column"
@@ -67,7 +67,7 @@
       <stats-bar
         :icon="icons.health"
         :value="member.stats.hp"
-        :max-value="MAX_HEALTH"
+        :max-value="maxHealth"
         :tooltip="$t('health')"
         progress-class="bg-health"
         :condensed="condensed"
@@ -253,6 +253,14 @@ export default {
     ...mapState({
       MAX_HEALTH: 'constants.MAX_HEALTH',
     }),
+    displayClass () {
+      // Map 'mage' to 'wizard' for class badge display
+      return this.member.stats.class === 'mage' ? 'wizard' : this.member.stats.class;
+    },
+    maxHealth () {
+      // Use character's actual maxHp if available, otherwise fall back to constant
+      return this.member.stats.maxHp || this.MAX_HEALTH;
+    },
     maxMP () {
       return statsComputed(this.member).maxMP;
     },

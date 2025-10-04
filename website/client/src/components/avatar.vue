@@ -43,14 +43,11 @@
         <span :class="[member.preferences.size + '_' + getGearClass('armor'), specialMountClass]"></span>
         <!-- eslint-enable max-len-->
         <span :class="[getGearClass('back_collar'), specialMountClass]"></span>
-        <template
+        <span
           v-for="type in ['bangs', 'base', 'mustache', 'beard']"
-        >
-          <span
-            :key="type"
-            :class="[hairClass(type), specialMountClass]"
-          ></span>
-        </template>
+          :key="type"
+          :class="[hairClass(type), specialMountClass]"
+        ></span>
         <span :class="[getGearClass('body'), specialMountClass]"></span>
         <span :class="[getGearClass('eyewear'), specialMountClass]"></span>
         <span :class="[getGearClass('head'), specialMountClass]"></span>

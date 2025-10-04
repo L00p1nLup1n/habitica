@@ -14,6 +14,7 @@
   "photoUrl": "Photo Url",
   "imageUrl": "Image Url",
   "inventory": "Inventory",
+  "projects": "Projects",
   "social": "Social",
   "lvl": "Lvl",
   "buffed": "Buffed",
@@ -191,5 +192,19 @@
   "offHand": "Off-Hand",
   "statPoints": "Stat Points",
   "pts": "pts",
-  "customizations": "Customizations"
+  "customizations": "Customizations",
+  "createAdventureCharacter": "Create Adventure Character",
+  "characterName": "Character Name",
+  "enterCharacterName": "Enter character name",
+  "pleaseEnterCharacterName": "Please enter a character name",
+  "characterNameTooLong": "Character name must be 50 characters or less",
+  "selectCharacterClass": "Select Class",
+  "appearance": "Appearance",
+  "characterCreatedSuccess": "Character created successfully!",
+  "errorCreatingCharacter": "Error creating character",
+  "warriorDescription": "High HP and strength, great for tanking",
+  "mageDescription": "High mana and intelligence, powerful magic",
+  "rogueDescription": "High perception, critical hits and gold",
+  "healerDescription": "Support specialist, healing and buffs",
+  "required": "Required"
 }

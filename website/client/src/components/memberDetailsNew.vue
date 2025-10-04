@@ -19,7 +19,7 @@
       <div class="d-flex align-items-center profile-first-row">
         <class-badge
           v-if="classBadgePosition === 'next-to-name'"
-          :member-class="member.stats.class"
+          :member-class="displayClass"
         />
         <div class="d-flex flex-column profile-name-character">
           <h3 class="character-name mt-75">
@@ -30,9 +30,9 @@
               :contributor="member.contributor"
             />
             <inline-class-badge
-              v-if="member.stats"
+              v-if="member.stats && member.stats.class"
               class="inline-class-badge"
-              :member-class="member.stats.class"
+              :member-class="displayClass"
             />
           </h3>
           <div class="small-text character-level">
@@ -293,6 +293,10 @@ export default {
     ...mapState({
       MAX_HEALTH: 'constants.MAX_HEALTH',
     }),
+    displayClass () {
+      // Map 'mage' to 'wizard' for class badge display
+      return this.member.stats.class === 'mage' ? 'wizard' : this.member.stats.class;
+    },
     maxMP () {
       return statsComputed(this.member).maxMP;
     },

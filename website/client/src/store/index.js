@@ -72,6 +72,7 @@ export default function clientStore () {
       tasks: asyncResourceFactory(), // user tasks
       // @TODO use asyncresource?
       completedTodosStatus: 'NOT_LOADED',
+      adventures: asyncResourceFactory(), // user adventures
       party: asyncResourceFactory(),
       partyMembers: asyncResourceFactory(),
       shops: {
@@ -150,6 +151,10 @@ export default function clientStore () {
       },
       postLoadModal: '',
       registrationOptions: {},
+
+      currentAdventure: null,
+      adventureCharacters: [],
+      currentAdventureId: null,
     },
   });
 

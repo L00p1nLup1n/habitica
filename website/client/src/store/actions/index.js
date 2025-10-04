@@ -1,6 +1,7 @@
 import { flattenAndNamespace } from '@/libs/store/helpers/internals';
 
 import * as admin from './admin';
+import * as adventures from './adventures';
 import * as common from './common';
 import * as user from './user';
 import * as tasks from './tasks';
@@ -27,6 +28,7 @@ import * as blockers from './blockers';
 
 const actions = flattenAndNamespace({
   admin,
+  adventures,
   common,
   user,
   tasks,

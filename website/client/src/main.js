@@ -10,6 +10,7 @@ import {
   TooltipPlugin,
   NavbarPlugin,
   CollapsePlugin,
+  TabsPlugin,
 } from 'bootstrap-vue';
 import Fragment from 'vue-fragment';
 import AppComponent from './app';
@@ -44,6 +45,7 @@ Vue.use(FormRadioPlugin);
 Vue.use(TooltipPlugin);
 Vue.use(NavbarPlugin);
 Vue.use(CollapsePlugin);
+Vue.use(TabsPlugin);
 Vue.use(Fragment.Plugin);
 
 setUpLogging();

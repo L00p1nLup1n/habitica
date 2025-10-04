@@ -655,6 +655,16 @@ export const UserSchema = new Schema({
         return isValidCategory;
       },
     },
+    customQuotes: {
+      enabled: { $type: Boolean, default: false },
+      quotes: [{
+        text: { $type: String, required: true, maxlength: 500 },
+        author: { $type: String, maxlength: 100 },
+        createdAt: { $type: Date, default: Date.now },
+      }],
+      currentQuoteIndex: { $type: Number, default: 0 },
+      lastQuoteDate: Date,
+    },
     analyticsConsent: Boolean,
   },
   profile: {

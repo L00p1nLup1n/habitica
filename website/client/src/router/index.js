@@ -31,6 +31,12 @@ const BlockerPage = () => import(/* webpackChunkName: "admin-panel" */'@/compone
 // Tasks
 const UserTasks = () => import(/* webpackChunkName: "userTasks" */'@/components/tasks/user');
 
+// Adventures
+const AdventuresIndex = () => import(/* webpackChunkName: "adventures" */'@/pages/adventures/index');
+const AdventuresList = () => import(/* webpackChunkName: "adventures" */'@/pages/adventures/adventuresList');
+const AdventureTasks = () => import(/* webpackChunkName: "adventures" */'@/pages/adventures/adventureTasks');
+const AdventureDetails = () => import(/* webpackChunkName: "adventures" */'@/pages/adventures/details');
+
 // Inventory
 const InventoryContainer = () => import(/* webpackChunkName: "inventory" */'@/components/inventory/index');
 const ItemsPage = () => import(/* webpackChunkName: "inventory" */'@/components/inventory/items/index');
@@ -85,6 +91,19 @@ const router = new VueRouter({
       name: 'forgotPassword', path: '/forgot-password', component: RegisterLoginReset, meta: { requiresLogin: false },
     },
     { name: 'tasks', path: '/', component: UserTasks },
+    {
+      path: '/adventures',
+      component: AdventuresIndex,
+      children: [
+        { name: 'adventuresList', path: '', component: AdventuresList },
+        {
+          name: 'adventureDetails', path: ':adventureId', component: AdventureDetails, props: true,
+        },
+        {
+          name: 'adventureTasks', path: ':adventureId/tasks', component: AdventureTasks, props: true,
+        },
+      ],
+    },
     {
       name: 'userProfile',
       path: '/profile/:userId',

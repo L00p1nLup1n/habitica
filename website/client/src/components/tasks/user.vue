@@ -4,6 +4,7 @@
     @click="openCreateBtn ? openCreateBtn = false : null"
   >
     <broken-task-modal />
+    <manage-quotes-modal />
     <task-modal
       ref="taskModal"
       :task="editingTask || creatingTask"
@@ -15,6 +16,9 @@
       :task="editingTask"
       @cancel="cancelTaskModal()"
     />
+    <div class="col-12">
+      <quote-of-the-day ref="quoteOfTheDay" />
+    </div>
     <div class="col-12">
       <div class="row tasks-navigation">
         <div class="col-12 col-md-4 offset-md-4">
@@ -405,6 +409,8 @@ import dragIcon from '@/assets/svg/drag_indicator.svg?raw';
 
 import { mapState, mapActions } from '@/libs/store';
 import brokenTaskModal from './brokenTaskModal';
+import QuoteOfTheDay from '@/components/quotes/quoteOfTheDay.vue';
+import ManageQuotesModal from '@/components/quotes/manageQuotesModal.vue';
 
 export default {
   components: {
@@ -414,6 +420,8 @@ export default {
     spells,
     brokenTaskModal,
     draggable,
+    QuoteOfTheDay,
+    ManageQuotesModal,
   },
   directives: {
     markdown,
@@ -497,9 +505,20 @@ export default {
       }
       this.$store.state.postLoadModal = '';
     }
+
+    // Listen for quote reload events
+    this.$root.$on('reload-daily-quote', this.reloadDailyQuote);
+  },
+  beforeDestroy () {
+    this.$root.$off('reload-daily-quote', this.reloadDailyQuote);
   },
   methods: {
     ...mapActions({ setUser: 'user:set' }),
+    reloadDailyQuote () {
+      if (this.$refs.quoteOfTheDay) {
+        this.$refs.quoteOfTheDay.fetchDailyQuote();
+      }
+    },
     checkMouseOver: throttle(function throttleSearch () {
       if (this.editingTags) return;
       this.closeFilterPanel();

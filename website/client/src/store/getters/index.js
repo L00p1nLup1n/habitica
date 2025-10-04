@@ -1,4 +1,5 @@
 import { flattenAndNamespace } from '@/libs/store/helpers/internals';
+import * as adventures from './adventures';
 import * as user from './user';
 import * as shops from './shops';
 import * as tasks from './tasks';
@@ -10,6 +11,7 @@ import * as worldState from './worldState';
 // Example: gems in user.js -> 'user:gems'
 
 const getters = flattenAndNamespace({
+  adventures,
   user,
   tasks,
   party,
